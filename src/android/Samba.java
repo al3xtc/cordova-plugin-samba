@@ -10,7 +10,7 @@ import org.json.JSONObject;
 public class Samba extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
-        if ("test".equals(action)) {
+        if (action.equals("test")) {
             String message = args.getString(0);
             callbackContext.success(message);
             return true;

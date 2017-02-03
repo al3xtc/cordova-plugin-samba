@@ -8,6 +8,10 @@
     <keywords>cordova,samba</keywords>
     <repo>https://github.com/al3xtc/cordova-plugin-samba.git</repo>
 
+    <js-module src="www/Samba.js" name="Samba">
+        <clobbers target="window.Samba" />
+    </js-module>
+
     <!-- android -->
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">

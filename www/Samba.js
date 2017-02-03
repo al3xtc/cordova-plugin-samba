@@ -1,8 +1,8 @@
 /*global cordova, module*/
 
 module.exports = {
-    auth: function (string, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "Samba", "auth", [string]);
+    auth: function (array, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "Samba", "auth", array);
     },
     getFiles: function (string, successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "Samba", "getFiles", [string]);

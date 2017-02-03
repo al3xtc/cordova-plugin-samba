@@ -30,7 +30,7 @@ public class Samba extends CordovaPlugin {
         return false;
     }
 
-    private JSONArray getFiles(String path) {
+    private JSONArray getFiles(String path) throws JSONException {
         String share = "smb://" + this.host + "/" + path + "/";
         JSONArray result = new JSONArray();
         try {

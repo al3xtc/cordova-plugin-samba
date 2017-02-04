@@ -8,7 +8,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import jcifs.smb.*;
-import java.net.MalformedURLException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class Samba extends CordovaPlugin {
     private NtlmPasswordAuthentication auth;

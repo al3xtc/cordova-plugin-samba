@@ -65,7 +65,7 @@ public class Samba extends CordovaPlugin {
             for (int i = 0; i < files.length; i++) {
                 JSONObject object = new JSONObject();
                 object.put("name", files[i].getName());
-                object.put("path", files[i].toString());
+                object.put("path", files[i].getPath());
                 object.put("createTime", (int)(files[i].createTime() / 1000));
                 object.put("size", files[i].getContentLength());
                 result.put(object);

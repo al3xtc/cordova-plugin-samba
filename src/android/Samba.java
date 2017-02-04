@@ -16,7 +16,7 @@ public class Samba extends CordovaPlugin {
     private String host;
 
     @Override
-    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException, IOException {
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("auth")) {
             this.auth = new NtlmPasswordAuthentication(null, args.getString(1), args.getString(2));
             this.host = args.getString(0);
@@ -35,35 +35,45 @@ public class Samba extends CordovaPlugin {
         return false;
     }
 
-    private String downloadFile(String path) throws IOException {
-        SmbFile file = new SmbFile(path, this.auth);
-        SmbFileInputStream in = new SmbFileInputStream(file);
-        FileOutputStream out = new FileOutputStream(file.getName());
+    private String downloadFile(String path) {
+        try {
+            SmbFile file = new SmbFile(path, this.auth);
+            SmbFileInputStream in = new SmbFileInputStream(file);
+            FileOutputStream out = new FileOutputStream(file.getName());
 
-        byte[] b = new byte[8192];
-        int i;
-        while ((i = in.read(b)) > 0) {
-            out.write(b, 0, i);
+            byte[] b = new byte[8192];
+            int i;
+            while ((i = in.read(b)) > 0) {
+                out.write(b, 0, i);
+            }
+
+            in.close();
+            out.close();
+            return file.getName();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        in.close();
-        out.close();
-        return file.getName();
+        return null;
     }
 
-    private JSONArray getFiles(String path) throws JSONException, IOException {
-        String share = "smb://" + this.host + "/" + path + "/";
-        JSONArray result = new JSONArray();
-        SmbFile dir = new SmbFile(share, this.auth);
-        SmbFile[] files = dir.listFiles();
-        for (int i = 0; i < files.length; i++) {
-            JSONObject object = new JSONObject();
-            object.put("name", files[i].getName());
-            object.put("path", files[i].toString());
-            object.put("createTime", (int)(files[i].createTime() / 1000));
-            object.put("size", files[i].getContentLength());
-            result.put(object);
+    private JSONArray getFiles(String path) throws JSONException {
+        try {
+            String share = "smb://" + this.host + "/" + path + "/";
+            JSONArray result = new JSONArray();
+            SmbFile dir = new SmbFile(share, this.auth);
+            SmbFile[] files = dir.listFiles();
+            for (int i = 0; i < files.length; i++) {
+                JSONObject object = new JSONObject();
+                object.put("name", files[i].getName());
+                object.put("path", files[i].toString());
+                object.put("createTime", (int)(files[i].createTime() / 1000));
+                object.put("size", files[i].getContentLength());
+                result.put(object);
+            }
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new JSONArray();
         }
-        return result;
     }
 }

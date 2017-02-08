@@ -7,7 +7,7 @@ module.exports = {
     getFiles: function (string, successCallback, errorCallback) {
         cordova.exec(successCallback, errorCallback, "Samba", "getFiles", [string]);
     },
-    downloadFile: function (string, successCallback, errorCallback) {
-        cordova.exec(successCallback, errorCallback, "Samba", "downloadFile", [string]);
+    downloadFile: function (array, successCallback, errorCallback) {
+        cordova.exec(successCallback, errorCallback, "Samba", "downloadFile", array);
     }
 };

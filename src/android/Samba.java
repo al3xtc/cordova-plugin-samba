@@ -47,11 +47,11 @@ public class Samba extends CordovaPlugin {
 
             in.close();
             out.close();
-            return 'success';
+            return "success";
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return 'fail';
+        return "fail";
     }
 
     private JSONArray getFiles(String path) throws JSONException {

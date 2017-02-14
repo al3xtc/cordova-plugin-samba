@@ -19,7 +19,7 @@ public class Samba extends CordovaPlugin {
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         if (action.equals("auth")) {
-            this.auth = new NtlmPasswordAuthentication(null, args.getString(0), args.getString(1));
+            this.auth = new NtlmPasswordAuthentication("domain", args.getString(0), args.getString(1));
             callbackContext.success();
             return true;
         }

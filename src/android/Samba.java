@@ -11,6 +11,8 @@ import jcifs.smb.*;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import android.content.Context;
+
 public class Samba extends CordovaPlugin {
     private NtlmPasswordAuthentication auth;
 
@@ -37,7 +39,7 @@ public class Samba extends CordovaPlugin {
         try {
             SmbFile file = new SmbFile(path, this.auth);
             SmbFileInputStream in = new SmbFileInputStream(file);
-            FileOutputStream out = new FileOutputStream(target);
+            FileOutputStream out = openFileOutput(target, MODE_WORLD_READABLE);
 
             byte[] b = new byte[8192];
             int i;

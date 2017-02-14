@@ -8,10 +8,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import jcifs.smb.*;
+
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-
-import android.content.Context;
 
 public class Samba extends CordovaPlugin {
     private NtlmPasswordAuthentication auth;
@@ -39,7 +39,7 @@ public class Samba extends CordovaPlugin {
         try {
             SmbFile file = new SmbFile(path, this.auth);
             SmbFileInputStream in = new SmbFileInputStream(file);
-            FileOutputStream out = this.cordova.getActivity().openFileOutput(target, Context.MODE_PRIVATE);
+            FileOutputStream out = new FileOutputStream(new File(target));
 
             byte[] b = new byte[8192];
             int i;

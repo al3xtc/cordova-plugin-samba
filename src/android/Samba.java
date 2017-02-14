@@ -39,7 +39,7 @@ public class Samba extends CordovaPlugin {
         try {
             SmbFile file = new SmbFile(path, this.auth);
             SmbFileInputStream in = new SmbFileInputStream(file);
-            FileOutputStream out = openFileOutput(target, 1);
+            FileOutputStream out = this.cordova.getActivity().openFileOutput(fileTo, Context.MODE_WORLD_READABLE);
 
             byte[] b = new byte[8192];
             int i;

@@ -72,7 +72,11 @@ public class Samba extends CordovaPlugin {
             return result;
         } catch (IOException e) {
             e.printStackTrace();
-            return new JSONArray();
+            JSONArray result = new JSONArray();
+            JSONObject object = new JSONObject();
+            object.put("error", e.getMessage());
+            result.put(object);
+            return result;
         }
     }
 }

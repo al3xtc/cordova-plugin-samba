@@ -52,8 +52,8 @@ public class Samba extends CordovaPlugin {
             return "success";
         } catch (IOException e) {
             e.printStackTrace();
+            return e.getMessage();
         }
-        return "fail";
     }
 
     private JSONArray getFiles(String path) throws JSONException {
